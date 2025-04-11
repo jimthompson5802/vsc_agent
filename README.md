@@ -3,6 +3,8 @@
 ## Overview
 Testbed for Visual Studio Code (VSCode) agent. This project is designed to facilitate the development and testing of an agent that can interact with VSCode.
 
+Inspired by this video: [VS Code Agent Mode Just Changed Everything](https://youtu.be/dutyOc_cAEU)
+
 ## Installation
 To install the necessary dependencies, run the following command:
 
