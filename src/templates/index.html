@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo App</title>
+</head>
+<body>
+    <h1>Echo Application</h1>
+    <form id="echoForm">
+        <label for="userInput">Enter text:</label>
+        <input type="text" id="userInput" name="user_input">
+        <br><br>
+        <label for="echoedText">Echoed text:</label>
+        <input type="text" id="echoedText" readonly>
+        <br><br>
+        <button type="button" onclick="echoText()">Echo</button>
+        <button type="button" onclick="clearText()">Clear</button>
+    </form>
+
+    <script>
+        async function echoText() {
+            const userInput = document.getElementById('userInput').value;
+            const response = await fetch('/echo', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_input: userInput })
+            });
+            const data = await response.json();
+            document.getElementById('echoedText').value = data.echoed_text;
+        }
+
+        async function clearText() {
+            const response = await fetch('/clear', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await response.json();
+            document.getElementById('userInput').value = data.user_input;
+            document.getElementById('echoedText').value = data.echoed_text;
+        }
+    </script>
+</body>
+</html>
