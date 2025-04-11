@@ -4,40 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Echo App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Echo Application</h1>
-    <form id="echoForm">
-        <label for="userInput">Enter text:</label>
-        <input type="text" id="userInput" name="user_input">
-        <br><br>
-        <label for="echoedText">Echoed text:</label>
-        <input type="text" id="echoedText" readonly>
-        <br><br>
-        <button type="button" onclick="echoText()">Echo</button>
-        <button type="button" onclick="clearText()">Clear</button>
-    </form>
+    <div class="container">
+        <h1>Echo App</h1>
+        <textarea id="inputText" placeholder="Enter text here..."></textarea>
+        <textarea id="outputText" readonly placeholder="Echoed text will appear here..."></textarea>
+        <br>
+        <button onclick="echoText()">Echo</button>
+        <button onclick="clearText()">Clear</button>
+    </div>
 
     <script>
         async function echoText() {
-            const userInput = document.getElementById('userInput').value;
+            const inputText = document.getElementById('inputText').value;
             const response = await fetch('/echo', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ user_input: userInput })
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: inputText }),
             });
             const data = await response.json();
-            document.getElementById('echoedText').value = data.echoed_text;
+            document.getElementById('outputText').value = data.echoed_text;
         }
 
         async function clearText() {
+            document.getElementById('inputText').value = '';
             const response = await fetch('/clear', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
             });
             const data = await response.json();
-            document.getElementById('userInput').value = data.user_input;
-            document.getElementById('echoedText').value = data.echoed_text;
+            document.getElementById('outputText').value = data.echoed_text;
         }
     </script>
 </body>

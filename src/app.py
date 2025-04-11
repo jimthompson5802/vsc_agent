@@ -8,13 +8,13 @@ def index():
 
 @app.route('/echo', methods=['POST'])
 def echo():
-    user_input = request.json.get('user_input', '')
-    echoed_text = f"echoed: {user_input}"
-    return jsonify({'echoed_text': echoed_text})
+    data = request.json
+    text = data.get('text', '')
+    return jsonify({"echoed_text": f"echoed: {text}"})
 
 @app.route('/clear', methods=['POST'])
 def clear():
-    return jsonify({'echoed_text': '', 'user_input': ''})
+    return jsonify({"echoed_text": ""})
 
 if __name__ == '__main__':
     app.run(debug=True)
