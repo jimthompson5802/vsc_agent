@@ -14,9 +14,9 @@ create a markdown table of user stories from the attached files.  the table shou
 Use of Claude Sonnet 3.7 in VSC Agent mode.
 
 ```
-setup the environment as described in the attachment.  as you perform the setups, cite the user story id.
+setup the environment as described in the attachment user stories.  as you perform the setups, cite the user story id.
 ```
 
 ```
-add or modify components as described in the attachment.  as you perform the setups, cite the user story id.
+add or modify components as described in the attachment user stories.  as you perform the setups, cite the user story id.
 ```
